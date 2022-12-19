@@ -1,0 +1,14 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "vsedov", email = "viv.sedov@hotmail.com"},
+]
+dependencies = [
+    "numpy>=1.24.0",
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}

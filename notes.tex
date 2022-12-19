@@ -1,0 +1,143 @@
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\par\singlespacing\small}
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Machine Learning and Data Mining In Aerospace Technology Notes}
+\author{Vivian Sedov}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Tensor based Anomaly Detection}
+
+\begin{definition}
+	Tensor Decomposition, also known as multi linear rank decomposition or tensor rank factorization. Is a mathematical technique for expressing a multi dimensional array tensor.
+
+	It is often used for dimentionality reduction, as it can reveal the underlying structure of the tensor, and identifying patterns and relationships that are not apparent when the tensor is expressed in its full form. A great example of this would be singular value decomposition, which is a generalization of the eigenvalue decomposition. In SVD, a tensor is decomposed into a sum of outer products of vectors, similar to the way that a matrix can be decomposed into a sum of outer products of its eigenvectors.
+
+	Here is an example of SVD on a matrix
+	Say we have a matrix mxm, and we want to find its svd
+	\begin{displaymath}
+		A = U \cdot S \cdot V**T
+	\end{displaymath}
+	\begin{itemize}
+		\item Where U is a mxm Unitary matrix
+		\item S is a mxn diagnoal matrix
+		\item V is the nxn unitary matrix
+	\end{itemize}
+
+\end{definition}
+
+Further Explanation of the following quote: Which some what confused me
+\begin{quote}
+	The target is to predict the observations labels into the test set. Thus, the devel-
+	oped model from the train set is utilized to predict the label (abnormal or normal) of
+	observation into the test factor matrix. In [7] proposed to utilized the three-way data
+	structure and apply a proper multi-way data analysis algorithm such as Parallel Fac-
+	tor Analysis, which is a simple model which obtained and utilized to train newness
+	detectors. Such methods are evaluated both with simulated and real structural data
+	to evaluate that the three-way analysis could be successfully utilized in structural
+	health monitoring. Moreover, the advantage of such approach with regard to feature
+	selection is also analyzed, Sensors make it possible to continually monitor pulses at
+	multiple locations of a structure. Using a wide sensor network is useful for damage
+	localization and a higher structural coverage, however it will also increase the num-
+	ber of variables. Thus, several dimensionality reduction is in demand, a PARAFAC
+	decomposition accompanied by k number of components is utilized on the time-
+	space- frequency tensor correlated to the normal samples and thereafter the acquired
+	time factor matrix trained via k-NN (where features are the implicit variables). The
+	model that has been built is then used for time point’s classification in the incoming
+	data.
+\end{quote}
+
+\textit{Goal: }In this context: the book states to use machine learning to predict the labels of observations in a test set that we get directly from a satalite. This is further based on patterns in a training set. The training set is consisted of a time series pattern, with multiple correlating variables, with corrected labels of the following :
+\begin{itemize}
+	\item Normal
+	\item Abnormal
+\end{itemize}
+
+For this to be achievable, it states to use a Tensor Decomposition method called
+\textit{PARAFAC} to decompose the data tensor into a set of factors: and then using one of the factors - the time factor matrix : as an input to a machine learning algorithm like KNN. Which you should know is a supervised learning method. This will allow for classfication of the labels.
+
+PARAFAC, is being used to reduce the dimensionality of the data and extract the important patterns from it . And then using knn to learn a classfication model based on those patterns.
+
+\begin{definition}[PARAFAC]
+	PARAFAC (Parallel Factors Analysis) is a tensor decomposition method that allows you to represent a multi-dimensional array (also known as a tensor) as the sum of simpler arrays. It is a generalization of the singular value decomposition (SVD), which is a widely used method for decomposing a matrix into a set of simpler matrices.
+
+	Like SVD, PARAFAC decomposes a tensor into a set of factors, which are lower-dimensional arrays that capture the most important patterns in the data. However, unlike SVD, which decomposes a matrix into a left singular matrix, a diagonal matrix, and a right singular matrix, PARAFAC decomposes a tensor into three or more factors, each of which corresponds to a different mode of the tensor.
+
+	For example, suppose you have a 3-dimensional tensor that represents a set of images, with the first mode representing the rows of the images, the second mode representing the columns of the images, and the third mode representing the color channels of the images. In this case, PARAFAC might decompose the tensor into three factors: one that represents the row structure of the images, one that represents the column structure of the images, and one that represents the color structure of the images.
+
+	PARAFAC is often used for tasks such as data compression, denoising, and data imputation, and can be especially useful for analyzing and understanding the structure of multi-dimensional data. It is also used in a variety of applications, including image processing, natural language processing, and structural health monitoring.
+	With PARAFAC, we can decompose the matrix X into three factors A, B, and C such that:
+
+	$$X_{m,n} = \sum_{k=1}^r A_{m,k} \cdot B_{n,k} \cdot C_{k}$$
+
+	where r is the rank of the decomposition, and A, B, and C are matrices with shapes (m, r), (n, r), and (r,), respectively.
+
+	With SVD, we can decompose the matrix X into a left singular matrix U, a diagonal matrix S, and a right singular matrix V such that:
+
+	$$X_{m,n} = U_{m,m} \cdot S_{m,n} \cdot V_{n,n}^T$$
+
+	where U and V are unitary matrices with shapes (m, m) and (n, n), respectively, and S is a diagonal matrix with shape (m, n).
+
+	So what you May want to think of parafac is getting the basis vector for a high level matrix.
+
+\end{definition}
+
+
+\end{document}
