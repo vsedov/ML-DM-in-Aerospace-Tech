@@ -135,9 +135,33 @@ PARAFAC, is being used to reduce the dimensionality of the data and extract the 
 
 	where U and V are unitary matrices with shapes (m, m) and (n, n), respectively, and S is a diagonal matrix with shape (m, n).
 
-	So what you May want to think of parafac is getting the basis vector for a high level matrix.
+	So what you May want to think of parafac is getting the basis vector for a high level matrix. This is an extension of PCA, it is wise if you know what PCA is first before you move onto this.
 
 \end{definition}
 
+\subsubsection{Tensor Classifier}
 
+\begin{definition}[Tensor classifiers]
+	Tensor classifiers are machine learning models that are specifically designed to handle tensorial (multi-dimensional array) data. These models can be used to classify data points based on their features, which are represented as tensors.
+\end{definition}
+
+One example of a tensor classifier is the support vector machine (SVM), which has been extended to handle tensorial data in the form of a tensor support vector machine (TSVM). TSVMs are trained directly on tensorial data, and the resulting model can be used for prediction. Tensor classifiers are particularly useful for detecting anomalies in multiway data, and have been applied successfully to image classification tasks.
+
+Another example of a tensor classifier is the supervised tensor learning (STL) framework, which is a combination of multilinear algebra operations and convex optimization. STL can be used to generalize a variety of classic machine learning techniques, such as support vector machines, Fisher discriminant analysis, and distance metric learning, to handle tensorial data.
+
+Tensor classifiers differ from traditional vector-based classifiers in that they represent training measurements as tensors rather than vectors, and the classification decision function is defined differently. In vector-based learning, the classification decision function is defined by a hyperplane, while in tensor-based learning, it is defined by a tensorplane. Tensor classifiers may be particularly useful for small sample cases, as they require fewer parameters to be estimated than traditional vector classifiers.
+
+Vector-based learning:
+In vector-based learning, the training measurements are represented as vectors, and the classification decision function is defined by a hyperplane. The hyperplane is defined by a weight vector 𝑤 ∈ 𝑅𝑙 and a bias term 𝑏 ∈ 𝑅, such that the classification function is given by:
+\begin{math}
+	y(𝑥) = sign[𝑤^𝑇𝑥 + 𝑏]
+\end{math}
+where 𝑥 is a feature vector and 𝑦 is the predicted class label.
+Tensor-based learning:
+
+In tensor-based learning, the training measurements are represented as tensors, and the classification decision function is defined by a tensorplane. The tensorplane is defined by weight tensors 𝑤𝑘 ∈ 𝑅𝑙𝑘 (for 1 ≤ 𝑘 ≤ 𝑀) and a bias term 𝑏 ∈ 𝑅, such that the classification function is given by:
+\begin{math}
+	y(𝑋) = sign[𝑋 ∏𝑀𝑘=1 𝑥𝑘 → 𝑤𝑘 + 𝑏]
+\end{math}
+The Tensor Least Square (TLS) method is an extension of the least squares classifier, which is a type of linear regression model. TLS is a tensor-based classifier that estimates the classification function by minimizing the sum of squared errors between the predicted and actual class labels. TLS has been tested on six databases from the UCI repository, and has been shown to be particularly suitable for small sample cases due to its lower number of required parameters compared to traditional vector classifiers.
 \end{document}
