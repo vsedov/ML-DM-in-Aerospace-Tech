@@ -1,4 +1,4 @@
-# ML-DM-in-aerospace-tech
+# ML-DM-in-Aerospace-Tech
 
 Notes on Machine Learning and data mining in aerospace technology.
 
