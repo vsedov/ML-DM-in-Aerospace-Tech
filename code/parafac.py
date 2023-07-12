@@ -18,7 +18,7 @@ print()
 for i in range(1, n + 1):
     print(f"Rank : {i}")
     print()
-    print([factor for factor in tl.decomposition.parafac(data, rank=i)])
+    print(list(tl.decomposition.parafac(data, rank=i)))
     print()
 
 # Invited in 1970 : https://en.wikipedia.org/wiki/Parafac
